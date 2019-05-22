@@ -533,7 +533,7 @@ if(PNG_SHARED)
   set_target_properties(png PROPERTIES OUTPUT_NAME ${PNG_LIB_NAME})
   target_include_directories(png PUBLIC
      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-     $<INSTALL_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
   )
   add_dependencies(png genfiles)
   if(MSVC)
@@ -541,7 +541,7 @@ if(PNG_SHARED)
     set_target_properties(png PROPERTIES PREFIX "lib")
     set_target_properties(png PROPERTIES IMPORT_PREFIX "lib")
   endif()
-  target_link_libraries(png ${ZLIB_LIBRARY} ${M_LIBRARY})
+  target_link_libraries(png zlib ${M_LIBRARY})
 
   if(UNIX AND AWK)
     if(HAVE_LD_VERSION_SCRIPT)
@@ -919,9 +919,9 @@ if(NOT SKIP_INSTALL_FILES AND NOT SKIP_INSTALL_ALL)
 endif()
 
 # Create an export file that CMake users can include() to import our targets.
-if(NOT SKIP_INSTALL_EXPORT AND NOT SKIP_INSTALL_ALL)
-  install(EXPORT libpng DESTINATION lib/libpng FILE lib${PNG_LIB_NAME}.cmake)
-endif()
+#~ if(NOT SKIP_INSTALL_EXPORT AND NOT SKIP_INSTALL_ALL)
+  #~ install(EXPORT libpng DESTINATION lib/libpng FILE lib${PNG_LIB_NAME}.cmake)
+#~ endif()
 
 # what's with libpng-manual.txt and all the extra files?
 
